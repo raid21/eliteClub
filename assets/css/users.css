@@ -35,12 +35,6 @@ a:focus {
     border: none;
 }
 
-.line {
-    width: 100%;
-    height: 1px;
-    border-bottom: 1px dashed #ddd;
-    margin: 40px 0;
-}
 
 /* ---------------------------------------------------
     SIDEBAR STYLE
@@ -158,10 +152,36 @@ ul ul a {
     top: 0;
     right: 0;
 }
+#content .msg {
+    width: 85%;
+    margin: 5px auto;
+    padding: 8px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    list-style: none;
+}
+
+#content .msg.success {
+    color: #3a6e3a;
+    border: none;
+    background: #bcf5bc;
+}
+
+#content .msg.error {
+    color: #884b4b;
+    border: none;
+    background: #f5bcbc;
+}
 
 #content .usr-details .img-fluid{height: 100px;}
-#content .usr-details .per-inf h5, #content .setting h4, #content .posts .posts-head{color: #08526d;}
+#content .usr-details .per-inf h5, #content .setting h4, #content .posts .posts-head,
+#content .create h4{color: #08526d;}
 #content .usr-details .per-inf .info-box p, #content .setting label{color: #213b52;}
 #content .posts .post .card .delete{color: red;}
 #content .posts .post .card .edit{color: #213b52;}
+#content .posts .post .card .card-title{text-decoration: underline;}
+#content .posts .post .card .card-text{text-transform: capitalize;}
 #content .posts .post .card .delete:hover, #content .posts .post .card .edit:hover{text-decoration: underline;}

@@ -1,3 +1,9 @@
+<?php 
+include("path.php"); 
+require(ROOT_PATH . "/app/controllers/users.php");
+$all_users = selectAll('users');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +14,7 @@
     <link rel="stylesheet" href="assets/css/fontawsome/css/all.min.css">
     <link href="assets/css/aos_animation.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/swiper.min.css">
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.main.css">
 </head>
 
@@ -16,7 +22,7 @@
     <!-- start of navbar -->
     <header>
         <div class="container">
-            <nav class="navbar navbar-expand-lg" data-aos="fade-left" data-aos-duration="2000">
+            <nav class="navbar navbar-expand-lg bg-light" data-aos="fade-left" data-aos-duration="2000">
 
                 <a class="navbar-brand text-uppercase" href="index.html">el<span>i</span>te</a>
 
@@ -28,36 +34,31 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto">
-                        <li class="nav-item"> <a class="nav-link active" href="index.html">Home</a></li>
+                        <li class="nav-item"> <a class="nav-link active" href="index.php">Home</a></li>
                         <li class="nav-item"> <a class="nav-link" href="#about">about</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="activities.html">activities</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="activities/">activities</a></li>
                         <li class="nav-item"> <a class="nav-link" href="#team">team</a></li>
                         <li class="nav-item"> <a class="nav-link" href="#contact">contact</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="#">blog</a></li>
+                        <!-- <li class="nav-item"> <a class="nav-link" href="#">blog</a></li> -->
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="loginDropDown" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">Login</a>
-                            <div class="dropdown-menu" aria-labelledby="loginDropDown">
+                        <?php include(ROOT_PATH . "/app/includes/login_nav.php") ?>
 
-                                <form class="form-inline m-2 m-sm-2" method="post">
-                                    <input type="text" class="form-control mr-2 mb-2" placeholder="Username"
-                                        name="username">
-                                    <input type="password" class="form-control mr-2 mb-2" placeholder="Password"
-                                        name="password">
-                                    <button class="btn btn-outline-success" name="login" type="submit">Login</button>
-                                </form>
-
-                            </div>
-                        </li>
                     </ul>
                 </div>
             </nav>
-            <div class="hero">
+            
+            <?php if(empty($_SESSION['type'])): ?>
+                <div class="hero">
                 <h1 class="text-center text-capitalize">welcome to elite 21</h1>
                 <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, harum, eos fuga
                     atque ad iure distinctio, sapiente eaque laborum earum omnis.</p>
             </div>
+            <?php else: ?>
+                <div class="mt-5">
+                <?php include(ROOT_PATH . "/app/helpers/messages.php") ?>
+            </div>
+            <?php endif; ?>
+            
         </div>
     </header>
     <!-- start of navbar -->
@@ -145,53 +146,43 @@
     <!-- end of events section -->
 
     <!-- start of our team section -->
-    <div class="our-team" id="team" data-aos="flip-down" data-aos-duration="2000">
-        <div class="container">
-            <h2 class="text-center">Our Team</h2>
-            <p class="text-center heading-p">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non itaque velit
-                impedit
-                quae.</p>
+    <?php if(!empty($all_users)): ?>
+        <div class="our-team" id="team" data-aos="flip-down" data-aos-duration="2000">
+            <div class="container">
+                <h2 class="text-center">Our Team</h2>
+                <p class="text-center heading-p">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non itaque velit
+                    impedit
+                    quae.</p>
 
-            <!-- Swiper -->
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
+                <!-- Swiper -->
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
 
-                    <div class="swiper-slide">
-                        <div class="card">
-                            <img src="assets/img/team-1.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title text-center">Raid Boulahdid</h5>
-                                <p class="card-text text-center">Admin</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card">
-                            <img src="assets/img/team-2.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title text-center">Raid Boulahdid</h5>
-                                <p class="card-text text-center">Member</p>
-                            </div>
-                        </div>
-                    </div>
+                        <?php foreach($all_users as $single_usr): ?>
+                            <div class="swiper-slide">
+                                <div class="card">
+                                    <img src="<?php echo BASE_URL . '/assets/img/' . $single_usr['profile_pic'] ?>" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center text-capitalize"><?php echo $single_usr['username'] ?></h5>
 
-                    <div class="swiper-slide">
-                        <div class="card">
-                            <img src="assets/img/team-1.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title text-center">Raid Boulahdid</h5>
-                                <p class="card-text text-center">Admin</p>
+                                        <?php if($single_usr['admin'] == 0): ?>
+                                            <p class="card-text text-center">Member</p>
+                                        <?php else: ?>
+                                            <p class="card-text text-center">Admin</p>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        <?php endforeach; ?>
+
                     </div>
 
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination"></div>
                 </div>
-
-                <!-- Add Pagination -->
-                <div class="swiper-pagination"></div>
             </div>
         </div>
-    </div>
+    <?php endif; ?>
     <!-- end of our team section -->
 
     <!-- start of contact us section -->
@@ -278,9 +269,9 @@
         </div>
     </div>
 
-    <script src="../static/js/jquery.min.js"></script>
-    <script src="../static/js/popper.js"></script>
-    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/popper.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/aos_animation.js"></script>
     <script src="assets/js/swiper.min.js"></script>
     <script src="assets/js/script.main.js"></script>
