@@ -8,25 +8,26 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $start = ($page - 1) * $limit;
 
 
-// if(isset($_POST['search-term']))
-// {
-//     $search_term = $_POST['search-term'];
-//     $postsTitle = "You searched for: '" . $_POST['search-term'] . "'";
-//     $result = $conn->query("SELECT * FROM activities WHERE act_title LIKE $search_term OR act_desc LIKE $search_term LIMIT $start, $limit");
-    
-//     $all_acts = $result->get_result()->fetch_all(MYSQLI_ASSOC);
 
-//     $all = count(searchPosts($_POST['search-term']));
-// }
+if(isset($_POST['search-term']))
+{
+    $search_term = $_POST['search-term'];
+    $postsTitle = "You searched for: '" . $_POST['search-term'] . "'";
+    $all_acts = searchActivitiesPosts($_POST['search-term'], $start, $limit);
+    $all = count($all_acts);
+}
+else
+{
+    $result = $conn->query("SELECT * FROM activities LIMIT $start, $limit");
+    $all_acts = $result->fetch_all(MYSQLI_ASSOC);
+    $all = count(selectAll('activities'));
 
-
-$result = $conn->query("SELECT * FROM activities LIMIT $start, $limit");
-$all_acts = $result->fetch_all(MYSQLI_ASSOC);
+}
 
 $first_arr = array();
 $second_arr = array();
 $third_arr = array();
-$all = count(selectAll('activities'));
+
 $prev = $page - 1;
 $next = $page + 1;
 
@@ -117,53 +118,58 @@ for($i=0; $i < count($all_acts); $i++)
     <div class="post-wrapper">
         <div class="container">
             <h2 class="font-weight-bold"><?php echo $postsTitle ?></h2>
-
-            <div class="row justify-content-center py-3">
-                
-                <div class="col-sm-12 col-md-12 col-lg-6 col-border">
-                    <div class="card">
-                        <img class="card-img-top" src="<?php echo BASE_URL . '/assets/img/' . $first_arr[0]['act_img'] ?>" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title text-capitalize"><a href="<?php echo("read.php?p_id=" . $first_arr[0]['id'] . '&usr_id=' . $first_arr[0]['user_id']) ?>"><?php echo $first_arr[0]['act_title'] ?></a></h5>
-                            <p class="card-text"><?php echo html_entity_decode(substr($first_arr[0]['act_desc'], 0, 50)) . '...' ?></p>
+            
+            <?php if(!empty($all_acts)): ?>
+                <div class="row justify-content-center py-3">
+                    
+                    <div class="col-sm-12 col-md-12 col-lg-6 col-border">
+                        <div class="card">
+                            <img class="card-img-top" src="<?php echo BASE_URL . '/assets/img/' . $first_arr[0]['act_img'] ?>" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title text-capitalize"><a href="<?php echo("read.php?p_id=" . $first_arr[0]['id'] . '&usr_id=' . $first_arr[0]['user_id']) ?>"><?php echo $first_arr[0]['act_title'] ?></a></h5>
+                                <p class="card-text"><?php echo html_entity_decode(substr($first_arr[0]['act_desc'], 0, 50)) . '...' ?></p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-sm-12 col-md-12 col-lg-3 col-border mt-sm-0 mt-md-3">
-                    <?php $j=0; ?>
-                    <?php foreach($second_arr as $arr): ?>
-                        <div class="card">
-                            <img class="card-img-top" src="<?php echo BASE_URL . '/assets/img/' . $arr['act_img'] ?>" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title text-capitalize"><a href="<?php echo("read.php?p_id=" . $arr['id'] . '&usr_id=' . $arr['user_id']) ?>"><?php echo $arr['act_title'] ?></a></h5>
-                                <p class="card-text"><?php echo html_entity_decode(substr($arr['act_desc'], 0, 100)) . '...' ?></p>
+                    <div class="col-sm-12 col-md-12 col-lg-3 col-border mt-sm-0 mt-md-3">
+                        <?php $j=0; ?>
+                        <?php foreach($second_arr as $arr): ?>
+                            <div class="card">
+                                <img class="card-img-top" src="<?php echo BASE_URL . '/assets/img/' . $arr['act_img'] ?>" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title text-capitalize"><a href="<?php echo("read.php?p_id=" . $arr['id'] . '&usr_id=' . $arr['user_id']) ?>"><?php echo $arr['act_title'] ?></a></h5>
+                                    <p class="card-text"><?php echo html_entity_decode(substr($arr['act_desc'], 0, 100)) . '...' ?></p>
+                                </div>
                             </div>
-                        </div>
-                        <?php if($j== 0): ?>
-                            <hr>
-                        <?php endif; ?>
-                        <?php $j++ ?>
-                    <?php endforeach; ?>
-                </div>
+                            <?php if($j== 0): ?>
+                                <hr>
+                            <?php endif; ?>
+                            <?php $j++ ?>
+                        <?php endforeach; ?>
+                    </div>
 
-                <div class="col-sm-12 col-md-12 col-lg-3 mt-sm-0 mt-md-5">
-                    <?php $j=0; ?>
-                    <?php foreach($third_arr as $arr): ?>
-                        <div class="card">
-                            <img class="card-img-top" src="<?php echo BASE_URL . '/assets/img/' . $arr['act_img'] ?>" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title text-capitalize"><a href="<?php echo("read.php?p_id=" . $arr['id'] . '&usr_id=' . $arr['user_id']) ?>"><?php echo $arr['act_title'] ?></a></h5>
-                                <p class="card-text"><?php echo html_entity_decode(substr($arr['act_desc'], 0, 100)) . '...' ?></p>
+                    <div class="col-sm-12 col-md-12 col-lg-3 mt-sm-0 mt-md-5">
+                        <?php $j=0; ?>
+                        <?php foreach($third_arr as $arr): ?>
+                            <div class="card">
+                                <img class="card-img-top" src="<?php echo BASE_URL . '/assets/img/' . $arr['act_img'] ?>" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title text-capitalize"><a href="<?php echo("read.php?p_id=" . $arr['id'] . '&usr_id=' . $arr['user_id']) ?>"><?php echo $arr['act_title'] ?></a></h5>
+                                    <p class="card-text"><?php echo html_entity_decode(substr($arr['act_desc'], 0, 100)) . '...' ?></p>
+                                </div>
                             </div>
-                        </div>
-                        <?php if($j== 0): ?>
-                            <hr>
-                        <?php endif; ?>
-                        <?php $j++ ?>
-                    <?php endforeach; ?>
+                            <?php if($j== 0): ?>
+                                <hr>
+                            <?php endif; ?>
+                            <?php $j++ ?>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
-            </div>
+            <?php else: ?>
+                <p>There is no posts yet !</p>
+            <?php endif; ?>
+
         </div>
 
             <nav aria-label="Page navigation example" class="mt-lg-4">

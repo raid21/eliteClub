@@ -50,8 +50,7 @@ $all_users = selectAll('users');
             <?php if(empty($_SESSION['type'])): ?>
                 <div class="hero">
                 <h1 class="text-center text-capitalize">welcome to elite 21</h1>
-                <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, harum, eos fuga
-                    atque ad iure distinctio, sapiente eaque laborum earum omnis.</p>
+                <h4 class="text-center">Being an Elite is a responsibility more than an advantage! <br>Be the best be the Elite</h4>
             </div>
             <?php else: ?>
                 <div class="mt-5">
@@ -73,11 +72,8 @@ $all_users = selectAll('users');
                         <div class="card shadow-lg one">
                             <div class="card-body">
                                 <h5 class="card-title text-capitalize">who are we</h5>
-                                <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod,
-                                    praesentium esse? Inventore quasi, necessitatibus fuga, nemo soluta non optio
-                                    consequatur aliquid in dolorum voluptatum nostrum! Ut laudantium eaque soluta quos.
+                                <p class="card-text">We are a non-profit medical association, created in July 25, 2019, includs medical students and health personnel, pharmacy and dental surgery.
                                 </p>
-                                <a href="#" class="card-link mx-auto">See More&#xa0;&#x203A;</i></a>
                             </div>
                         </div>
                     </div>
@@ -88,9 +84,8 @@ $all_users = selectAll('users');
                         <div class="card shadow-lg two">
                             <div class="card-body">
                                 <h5 class="card-title text-capitalize">what we do</h5>
-                                <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod,
-                                    praesentium esse? Inventore quasi, necessitatibus fuga, nemo soluta non optio
-                                    consequatur aliquid in dolorum voluptatum nostrum! Ut laudantium eaque soluta quos.
+                                <p class="card-text">We aim to promote the medical sector in Skikda, educate citizens about the various health problems and ensuring the best possible environment for the personal and educational development of our members.
+                                    We attach great importance to students so they can: enrich their scientific knowledge through training and targeted days, sculpt and exploit their talents in different areas.
                                 </p>
                             </div>
                         </div>
@@ -195,9 +190,9 @@ $all_users = selectAll('users');
             <div class="row">
                 <div class="col-sm-12 col-md-6 col-lg-4" data-aos="fade-right" data-aos-duration="2000">
                     <div class="info-box">
-                        <i class="fal fa-map-marker-alt"></i>
-                        <h3>Our Address</h3>
-                        <p>A108 Adam Street, New York, NY 535022</p>
+                        <i class="fab fa-facebook-f"></i>
+                        <h3>Our Facebook</h3>
+                        <p>Nems Skikda</p>
                     </div>
                 </div>
 
@@ -205,16 +200,14 @@ $all_users = selectAll('users');
                     <div class="info-box">
                         <i class="fal fa-envelope"></i>
                         <h3>Email Us</h3>
-                        <p>boulahdidraid18@gmail.com</p>
-                        <p>raidski20@gmail.com</p>
+                        <p>elite_skikda@outlook.fr</p>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4" data-aos="fade-left" data-aos-duration="2000">
                     <div class="info-box">
                         <i class="fal fa-phone-volume"></i>
                         <h3>Call Us</h3>
-                        <p>+213 (0) 794766196</p>
-                        <p>+213 (0) 674587326</p>
+                        <p>+213 (0) 671000795</p>
                     </div>
                 </div>
             </div>
@@ -257,10 +250,8 @@ $all_users = selectAll('users');
                                 Reserved</div>
                         </div>
                         <div class="col-xm-12 col-sm-6 col-md-5 social-links">
-                            <a href="https://www.facebook.com/Mandalore21/"><i class="fab fa-facebook-f"></i></a>
-                            <a href="https://www.instagram.com/raid_boulahdid/"><i class="fab fa-instagram ml-3"></i></a>
-                            <a href="https://www.linkedin.com/in/raid-boulahdid-0752a0140/"><i class="fab fa-linkedin-in ml-3"></i></a>
-                            <a href="https://github.com/raid21"><i class="fab fa-github ml-3"></i></a>
+                            <a href="https://www.facebook.com/nems.skikda.1"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.instagram.com/elite_skikda_21_/"><i class="fab fa-instagram ml-3"></i></a>
                         </div>
                     </div>
                 </div>

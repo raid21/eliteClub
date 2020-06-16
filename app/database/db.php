@@ -133,14 +133,14 @@ function getUserPost($usr, $p_id)
     return $records;
 }
 
-// function searchPosts($term)
-// {
-//     global $conn;
-//     $match = '%' . $term . '%';
-//     $sql = "SELECT p.* FROM activities AS p WHERE p.act_title LIKE ? OR p.act_desc LIKE ?";
+function searchActivitiesPosts($term, $startt, $limite)
+{
+    global $conn;
+    $match = '%' . $term . '%';
+    $sql = "SELECT p.* FROM activities AS p WHERE p.act_title LIKE ? OR p.act_desc LIKE ? LIMIT $startt, $limite";
 
-//     $stmt = executeQuery($sql, ['act_title' => $match, 'act_desc' => $match]);
-//     $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-//     return $records;
-// }
+    $stmt = executeQuery($sql, ['act_title' => $match, 'act_desc' => $match]);
+    $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    return $records;
+}
 ?>
