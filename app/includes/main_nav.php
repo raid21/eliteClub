@@ -17,7 +17,7 @@
                                 <a class="nav-link" href="<?php echo BASE_URL . '/' ?>">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php echo BASE_URL . '/activities/' ?>">Activities</a>
+                                <a class="nav-link" href="<?php echo BASE_URL . '/activities/' ?>">Blog</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo BASE_URL . '/index.php#contact' ?>">Contact</a>

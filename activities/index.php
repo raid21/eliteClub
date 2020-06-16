@@ -2,7 +2,7 @@
 include("../path.php");
 include(ROOT_PATH . '/app/controllers/users.php');
 
-$postsTitle = 'Activities';
+$postsTitle = 'Blog';
 $limit = 5;
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $start = ($page - 1) * $limit;
@@ -55,7 +55,7 @@ for($i=0; $i < count($all_acts); $i++)
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Activities | Elite</title>
+    <title>Blog | Elite</title>
     <link rel="stylesheet" href="../assets/css/fontawsome/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/style.main.css">
@@ -68,7 +68,7 @@ for($i=0; $i < count($all_acts); $i++)
         <div class="container">
             <nav class="navbar navbar-expand-lg" data-aos="fade-left" data-aos-duration="2000">
 
-                <a class="navbar-brand text-uppercase" href="../index.html">el<span>i</span>te</a>
+                <a class="navbar-brand text-uppercase" href="../index.php">el<span>i</span>te</a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -80,10 +80,9 @@ for($i=0; $i < count($all_acts); $i++)
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item"> <a class="nav-link" href="../index.php">Home</a></li>
                         <li class="nav-item"> <a class="nav-link" href="../index.php#about">about</a></li>
-                        <li class="nav-item"> <a class="nav-link active" href="index.php">activities</a></li>
+                        <li class="nav-item"> <a class="nav-link active" href="index.php">Blog</a></li>
                         <li class="nav-item"> <a class="nav-link" href="../index.php#team">team</a></li>
                         <li class="nav-item"> <a class="nav-link" href="../index.php##contact">contact</a></li>
-                        <!-- <li class="nav-item"> <a class="nav-link" href="#">blog</a></li> -->
 
                         <?php include(ROOT_PATH . "/app/includes/login_nav.php") ?>
                         

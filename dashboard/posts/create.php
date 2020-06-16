@@ -37,6 +37,9 @@ $user_det = selectOne('users', ['id' => $_SESSION['id']]);
                     <div class="col-sm-12 p-sm-1 p-lg-5 create shadow-lg rounded">
 
                         <h4 class="text-center">Create Post</h4>
+
+                        <?php include(ROOT_PATH . "/app/helpers/messages.php") ?>
+
                         <form action="create.php" method="POST" enctype="multipart/form-data" class="mb-5">
 
                             <div class="form-group">
@@ -52,16 +55,6 @@ $user_det = selectOne('users', ['id' => $_SESSION['id']]);
                             <div class="form-group">
                                 <label for="act_img">Select image</label>
                                 <input type="file" class="form-control-file" name="act_img" id="act_img">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="act_date">Activity Date</label>
-                                <input type="text" class="form-control" name="act_date" placeholder="Ex: june 7, 2020" id="act_date">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="act_time">Activity Date</label>
-                                <input type="text" class="form-control" name="act_time" placeholder="Ex: 7:00 AM" id="act_time">
                             </div>
 
                             <button type="submit" name="create-act" class="btn btn-primary">Submit</button>

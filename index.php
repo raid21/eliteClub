@@ -1,7 +1,8 @@
 <?php 
 include("path.php"); 
 require(ROOT_PATH . "/app/controllers/users.php");
-$all_users = selectAll('users');
+$all_users = selectAll('users', ['admin' => 1]);
+$latest_events = latest_events('events');
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +25,7 @@ $all_users = selectAll('users');
         <div class="container">
             <nav class="navbar navbar-expand-lg bg-light" data-aos="fade-left" data-aos-duration="2000">
 
-                <a class="navbar-brand text-uppercase" href="index.html">el<span>i</span>te</a>
+                <a class="navbar-brand text-uppercase" href="index.php">el<span>i</span>te</a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -36,10 +37,12 @@ $all_users = selectAll('users');
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item"> <a class="nav-link active" href="index.php">Home</a></li>
                         <li class="nav-item"> <a class="nav-link" href="#about">about</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="activities/">activities</a></li>
+                        <?php if(!empty($latest_events)): ?>
+                            <li class="nav-item"> <a class="nav-link" href="#activities">events</a></li>
+                        <?php endif; ?>
+                        <li class="nav-item"> <a class="nav-link" href="activities/">Blog</a></li>
                         <li class="nav-item"> <a class="nav-link" href="#team">team</a></li>
                         <li class="nav-item"> <a class="nav-link" href="#contact">contact</a></li>
-                        <!-- <li class="nav-item"> <a class="nav-link" href="#">blog</a></li> -->
 
                         <?php include(ROOT_PATH . "/app/includes/login_nav.php") ?>
 
@@ -98,46 +101,40 @@ $all_users = selectAll('users');
     <!-- end of who are we section -->
 
     <!-- start of events section -->
-    <div class="activities" id="activities">
-        <div class="container">
-            <div class="event-cont" data-aos="fade-left" data-aos-duration="1500">
-                <div class="row">
+    <?php if(!empty($latest_events)): ?>
+        <div class="activities" id="activities">
+            <div class="container">
+                <div class="event-cont" data-aos="fade-left" data-aos-duration="1500">
+                    <div class="row">
 
-                    <div class="heading col-sm-12 col-md-4" data-aos="fade-right" data-aos-duration="2000">
-                        <h5>Upcoming Activities</h5>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit</p>
-                        <a href="#">See All&#xa0;<i class="fal fa-chevron-circle-right"></i></a>
-                    </div>
-
-                    <div class="col-sm-12 col-md-4 one" data-aos="fade-up" data-aos-duration="3000">
-                        <div class="card">
-                            <div class="test">
-                                <p>June 7, 2020</p>
-                                <img src="assets/img/event2.jpg" class="card-img-top" alt="event pic">
-                            </div>
-                            <div class="card-body">
-                                <a href="#">Lorem ipsum dolor sit amet.</a>
-                            </div>
+                        <div class="heading col-sm-12 col-md-4" data-aos="fade-right" data-aos-duration="2000">
+                            <h5>Upcoming Events</h5>
+                            <p>Here you can find our upcoming events.</p>
                         </div>
-                    </div>
 
-                    <div class="col-sm-12 col-md-4" data-aos="fade-up" data-aos-duration="3000">
-                        <div class="card">
-                            <div class="test">
-                                <p>June 6, 2020</p>
-                                <img src="assets/img/event2.jpg" class="card-img-top" alt="event pic">
-                            </div>
-                            <div class="card-body">
-                                <a href="#">Lorem ipsum dolor sit amet</a>
-                            </div>
-                        </div>
-                    </div>
+                        <?php foreach($latest_events as $event): ?>
 
+                            <div class="col-sm-12 col-md-4 " data-aos="fade-up" data-aos-duration="3000">
+                                <div class="card">
+                                    <div class="test">
+                                        <p class="text-capitalize"><?php echo $event['event_date'] ?></p>
+                                        <img src="<?php echo BASE_URL . '/assets/img/' . $event['event_img'] ?>" class="card-img-top" alt="event pic">
+                                    </div>
+                                    <div class="card-body">
+                                        <a href="#" class="text-capitalize"><?php echo $event['event_title'] ?></a>
+                                        <p class="card-text text-uppercase event-time"><?php echo $event['event_time'] ?></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <?php endforeach; ?>
+
+                    </div>
                 </div>
-            </div>
 
+            </div>
         </div>
-    </div>
+    <?php endif; ?>
     <!-- end of events section -->
 
     <!-- start of our team section -->

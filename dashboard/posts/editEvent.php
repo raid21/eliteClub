@@ -1,8 +1,7 @@
 <?php 
 include("../../path.php");
-include(ROOT_PATH . '/app/controllers/posts.php');
-usersOnly();
-// $user_det = selectOne('users', ['id' => $_SESSION['id']]);
+include(ROOT_PATH . '/app/controllers/events.php');
+adminOnly();
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +10,7 @@ usersOnly();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Post | Elite</title>
+    <title>Edit Event | Elite</title>
     <link rel="stylesheet" href="../../assets/css/fontawsome/css/all.min.css">
     <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
     <!-- Our Custom CSS -->
@@ -36,23 +35,38 @@ usersOnly();
                 <div class="row mb-5">
                     <div class="col-sm-12 p-sm-1 p-lg-5 create shadow-lg rounded">
 
-                        <h4 class="text-center">Edit Post</h4>
+                        <h4 class="text-center">Edit Event</h4>
 
                         <?php include(ROOT_PATH . "/app/helpers/messages.php") ?>
 
-                        <form action="edit.php" method="POST" enctype="multipart/form-data" class="mb-5">
+                        <form action="editEvent.php" method="POST" enctype="multipart/form-data" class="mb-5">
                             <input type="hidden" name="id" value="<?php echo $id; ?>">
                             <div class="form-group">
-                                <label for="act_title">Activity Title</label>
-                                <input type="text" class="form-control" name="act_title" value="<?php echo $title; ?>" placeholder="Enter title" id="act_title">
+                                <label for="event_title">Event Title</label>
+                                <input type="text" class="form-control" name="event_title" value="<?php echo $title; ?>" placeholder="Enter title" id="event_title">
                             </div>
 
                             <div class="form-group">
-                                <label for="act_desc">Activity Details</label>
-                                <textarea class="form-control" id="act_desc" name="act_desc" rows="3"><?php echo $act_desc ?></textarea>
+                                <label for="event_desc">Event Details</label>
+                                <textarea class="form-control" id="event_desc" name="event_desc" rows="3"><?php echo $event_desc ?></textarea>
                             </div>
 
-                            <button type="submit" name="update-act" class="btn btn-primary">Submit</button>
+                            <div class="form-group">
+                                <label for="event_img">Select image</label>
+                                <input type="file" class="form-control-file" name="event_img" id="event_img">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="event_date">Event Date</label>
+                                <input type="text" class="form-control" value="<?php echo $event_date ?>" name="event_date" placeholder="Ex: june 7, 2020" id="event_date">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="event_time">Event Time</label>
+                                <input type="text" class="form-control" value="<?php echo $event_time ?>" name="event_time" placeholder="Ex: 7:00 AM" id="event_time">
+                            </div>
+
+                            <button type="submit" name="update-event" class="btn btn-primary">Submit</button>
 
                         </form>
                     </div>

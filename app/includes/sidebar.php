@@ -30,6 +30,9 @@
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
                             <a href="<?php echo BASE_URL . '/dashboard/posts/create.php' ?>">Create Post</a>
+                            <?php if($user_det['admin'] === 1): ?>
+                                <a href="<?php echo BASE_URL . '/dashboard/posts/createEvent.php' ?>">Create Event</a>
+                            <?php endif; ?>
                         </li>
 
                     </ul>
@@ -50,17 +53,17 @@
                     </li>
                 <?php endif; ?>
 
-                <li>
+                <!-- <li>
                     <a href="#searchSubmenu" data-toggle="collapse" aria-expanded="false"><i class="fas fa-search"></i>
                         Search <i class="fas fa-chevron-down"></i></a>
                     <ul class="collapse list-unstyled" id="searchSubmenu">
                         <li class="m-2">
-                            <form action="#" method="POST">
-                                <input type="text" class="form-control" name="search" placeholder="Search ..." id="search">
+                            <form action="profile.php" method="POST">
+                                <input type="text" class="form-control" name="prof-search" placeholder="Search ..." id="search">
                             </form>
                         </li>
                     </ul>
-                </li>
+                </li> -->
 
             </ul>
 

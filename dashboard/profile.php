@@ -111,7 +111,6 @@ $usr_posts = selectAll('activities', ['user_id' => $_SESSION['id']]);
                                             </div>
                                             <p class="card-title mt-4 mb-1 text-primary font-weight-bold text-uppercase"><?php echo $usr_post['act_title'] ?></p>
                                             <p class="card-text mb-1"><?php echo $usr_post['act_desc'] ?></p>
-                                            <p class="card-text"><?php echo($usr_post['act_date'] . ' at: ' . $usr_post['act_time'] . '.') ?></p>
                                         </div>
                                         <img class="card-img-bottom img-fluid" src="<?php echo BASE_URL . '/assets/img/' . $usr_post['act_img'] ?>" alt="Card image">
                                     </div>

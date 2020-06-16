@@ -143,4 +143,16 @@ function searchActivitiesPosts($term, $startt, $limite)
     $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     return $records;
 }
+
+function latest_events($table)
+{
+    global $conn;
+    $sql = "SELECT * FROM $table ORDER BY id DESC LIMIT 2";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    return $records;
+
+}
 ?>

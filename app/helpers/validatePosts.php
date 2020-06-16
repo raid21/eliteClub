@@ -26,15 +26,44 @@ function validatePosts($post)
             array_push($errors, "Activity title already exists");
         }
     }
+    return $errors;
+}
 
-    if(empty($post['act_date']))
+function validateEvent($event)
+{
+    $errors = array();
+
+    if(empty($event['event_title']))
     {
-        array_push($errors, "Activity date is required");
+        array_push($errors, "Event title is required");
     }
 
-    if(empty($post['act_time']))
+    if(empty($event['event_desc']))
     {
-        array_push($errors, "Activity time is required");
+        array_push($errors, "Event details is required");
+    }
+
+    $existingEvent = selectOne('events', ['event_title' => $event['event_title']]);
+    if ($existingEvent) {
+        if(isset($_POST['update-event']) && $existingEvent['id'] != $event['id'])
+        {
+            array_push($errors, "Event title already exists");
+        }
+
+        if(isset($_POST['add-event']))
+        {
+            array_push($errors, "Event title already exists");
+        }
+    }
+
+    if(empty($event['event_date']))
+    {
+        array_push($errors, "Event date is required");
+    }
+
+    if(empty($event['event_time']))
+    {
+        array_push($errors, "Event time is required");
     }
 
     return $errors;

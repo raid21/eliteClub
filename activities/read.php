@@ -30,7 +30,7 @@ else
     <nav class="navbar navbar-expand-lg act">
         <div class="container">
 
-            <a class="navbar-brand text-uppercase" href="../../index.html">el<span>i</span>te</a>
+            <a class="navbar-brand text-uppercase" href="../../index.php">el<span>i</span>te</a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,10 +41,9 @@ else
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item"> <a class="nav-link" href="../index.php">Home</a></li>
                     <li class="nav-item"> <a class="nav-link" href="../index.php#about">about</a></li>
-                    <li class="nav-item"> <a class="nav-link active" href="index.php">activities</a></li>
+                    <li class="nav-item"> <a class="nav-link active" href="index.php">Blog</a></li>
                     <li class="nav-item"> <a class="nav-link" href="../index.php#team">team</a></li>
                     <li class="nav-item"> <a class="nav-link" href="../index.php##contact">contact</a></li>
-                    <!-- <li class="nav-item"> <a class="nav-link" href="#">blog</a></li> -->
 
                     <?php include(ROOT_PATH . "/app/includes/login_nav.php") ?>
 

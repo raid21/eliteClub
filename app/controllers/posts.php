@@ -22,9 +22,6 @@ if(isset($_GET['edit_id']))
     $id = $post_ele['id'];
     $title = $post_ele['act_title'];
     $act_desc = $post_ele['act_desc'];
-    $act_date = $post_ele['act_date'];
-    $act_time = $post_ele['act_time'];
-    $act_img = $post_ele['act_img'];
 }
 
 // delete posts
@@ -78,6 +75,7 @@ if(isset($_POST['create-act']))
     }
     else
     {
+        $_SESSION['type'] = 'error';
         $title = $_POST['act_title'];
         $act_desc = $_POST['act_desc'];
     }

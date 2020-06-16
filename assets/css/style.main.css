@@ -105,6 +105,8 @@ header{background: #213b52; height: 75vh; background-image: url(../img/header_he
 .activities .event-cont .heading h5{color: #08526d;}
 .activities .event-cont .card{margin-top: -45px;}
 .activities .event-cont .card .test{position: relative;}
+.activities .event-cont .card img{height: 184.66px;}
+.activities .event-cont .card .card-body .event-time{margin-bottom: .3rem;}
 .activities .event-cont .card .test p{
     margin: 0;
     position: absolute;
@@ -113,7 +115,7 @@ header{background: #213b52; height: 75vh; background-image: url(../img/header_he
     border: none;
     background: #08526d;
     padding: 10px;
-    width: 70px;
+    width: 80px;
     color: #fff;
 }
 @media(max-width: 767px){
