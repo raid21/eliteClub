@@ -10,6 +10,7 @@
             <ul class="list-unstyled components">
                 <li class="active">
                     <?php if(isset($_SESSION['id'])): ?>
+                        
                         <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="text-capitalize"><i class="fas fa-user"></i>
                         <?php echo $user_det['username']; ?> <i class="fas fa-chevron-down"></i></a>
                         <ul class="collapse list-unstyled" id="userSubmenu">
@@ -51,19 +52,30 @@
                             </li>
                         </ul>
                     </li>
-                <?php endif; ?>
 
-                <!-- <li>
-                    <a href="#searchSubmenu" data-toggle="collapse" aria-expanded="false"><i class="fas fa-search"></i>
-                        Search <i class="fas fa-chevron-down"></i></a>
-                    <ul class="collapse list-unstyled" id="searchSubmenu">
-                        <li class="m-2">
-                            <form action="profile.php" method="POST">
-                                <input type="text" class="form-control" name="prof-search" placeholder="Search ..." id="search">
-                            </form>
-                        </li>
-                    </ul>
-                </li> -->
+                    <li>
+                        <a href="#doctorSubmenu" data-toggle="collapse" aria-expanded="false"><i class="fas fa-user"></i>
+                            Manage Doctors <i class="fas fa-chevron-down"></i></a>
+                        <ul class="collapse list-unstyled" id="doctorSubmenu">
+                            <li>
+                                <a href="<?php echo BASE_URL . '/dashboard/teleconsultation/all_domains/all_drs.php' ?>">All Doctors</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo BASE_URL . '/dashboard/teleconsultation/all_domains/all_dentists.php' ?>">All Dentists</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo BASE_URL . '/dashboard/teleconsultation/all_domains/all_pharm.php' ?>">All Pharmacies</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo BASE_URL . '/dashboard/teleconsultation/creation/addDoctor.php' ?>">Add Doctor</a>
+                            </li>
+
+                            <li>
+                                <a href="<?php echo BASE_URL . '/dashboard/teleconsultation/creation/createMedicalSp.php' ?>">Add Specialty</a>
+                            </li>
+                        </ul>
+                    </li>
+                <?php endif; ?>
 
             </ul>
 

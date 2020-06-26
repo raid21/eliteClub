@@ -68,7 +68,7 @@ for($i=0; $i < count($all_acts); $i++)
         <div class="container">
             <nav class="navbar navbar-expand-lg" data-aos="fade-left" data-aos-duration="2000">
 
-                <a class="navbar-brand text-uppercase" href="../index.php">el<span>i</span>te</a>
+                <a class="navbar-brand text-uppercase" href="../index.php"><img src="../assets/img/elite_logo.png" alt="">  el<span>i</span>te<small>21</small></a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -121,11 +121,11 @@ for($i=0; $i < count($all_acts); $i++)
             <?php if(!empty($all_acts)): ?>
                 <div class="row justify-content-center py-3">
                     
-                    <div class="col-sm-12 col-md-12 col-lg-6 col-border">
+                    <div class="col-sm-12 col-md-12 col-lg-6 <?php if(!empty($second_arr)) {echo 'col-border';} ?>">
                         <div class="card">
                             <img class="card-img-top" src="<?php echo BASE_URL . '/assets/img/' . $first_arr[0]['act_img'] ?>" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title text-capitalize"><a href="<?php echo("read.php?p_id=" . $first_arr[0]['id'] . '&usr_id=' . $first_arr[0]['user_id']) ?>"><?php echo $first_arr[0]['act_title'] ?></a></h5>
+                                <h5 class="card-title text-capitalize"><a href="<?php echo("read.php?p_id=" . $first_arr[0]['id'] . '&usr_id=' . $first_arr[0]['user_id'] . "&t=activities") ?>"><?php echo $first_arr[0]['act_title'] ?></a></h5>
                                 <p class="card-text"><?php echo html_entity_decode(substr($first_arr[0]['act_desc'], 0, 50)) . '...' ?></p>
                             </div>
                         </div>
@@ -137,7 +137,7 @@ for($i=0; $i < count($all_acts); $i++)
                             <div class="card">
                                 <img class="card-img-top" src="<?php echo BASE_URL . '/assets/img/' . $arr['act_img'] ?>" alt="Card image cap">
                                 <div class="card-body">
-                                    <h5 class="card-title text-capitalize"><a href="<?php echo("read.php?p_id=" . $arr['id'] . '&usr_id=' . $arr['user_id']) ?>"><?php echo $arr['act_title'] ?></a></h5>
+                                    <h5 class="card-title text-capitalize"><a href="<?php echo("read.php?p_id=" . $arr['id'] . '&usr_id=' . $arr['user_id'] . "&t=activities") ?>"><?php echo $arr['act_title'] ?></a></h5>
                                     <p class="card-text"><?php echo html_entity_decode(substr($arr['act_desc'], 0, 100)) . '...' ?></p>
                                 </div>
                             </div>
@@ -154,7 +154,7 @@ for($i=0; $i < count($all_acts); $i++)
                             <div class="card">
                                 <img class="card-img-top" src="<?php echo BASE_URL . '/assets/img/' . $arr['act_img'] ?>" alt="Card image cap">
                                 <div class="card-body">
-                                    <h5 class="card-title text-capitalize"><a href="<?php echo("read.php?p_id=" . $arr['id'] . '&usr_id=' . $arr['user_id']) ?>"><?php echo $arr['act_title'] ?></a></h5>
+                                    <h5 class="card-title text-capitalize"><a href="<?php echo("read.php?p_id=" . $arr['id'] . '&usr_id=' . $arr['user_id'] . "&t=activities") ?>"><?php echo $arr['act_title'] ?></a></h5>
                                     <p class="card-text"><?php echo html_entity_decode(substr($arr['act_desc'], 0, 100)) . '...' ?></p>
                                 </div>
                             </div>
@@ -166,7 +166,7 @@ for($i=0; $i < count($all_acts); $i++)
                     </div>
                 </div>
             <?php else: ?>
-                <p>There is no posts yet !</p>
+                <h2>There is no posts yet !</h2>
             <?php endif; ?>
 
         </div>

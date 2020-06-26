@@ -2,7 +2,7 @@
 include("../../path.php");
 include(ROOT_PATH . '/app/controllers/posts.php');
 usersOnly();
-// $user_det = selectOne('users', ['id' => $_SESSION['id']]);
+$user_det = selectOne('users', ['id' => $_SESSION['id']]);
 ?>
 
 <!DOCTYPE html>
@@ -71,26 +71,7 @@ usersOnly();
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#sidebar").mCustomScrollbar({
-                theme: "minimal"
-            });
-
-            $('#dismiss, .overlay').on('click', function () {
-                $('#sidebar').removeClass('active');
-                $('.overlay').removeClass('active');
-            });
-
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').addClass('active');
-                $('.overlay').addClass('active');
-                $('.collapse.in').toggleClass('in');
-                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-            });
-        });
-
-    </script>
+    <script src="../../assets/js/script.main.js"></script>
 </body>
 
 </html>

@@ -4,7 +4,15 @@ include(ROOT_PATH . '/app/controllers/users.php');
 if(isset($_GET['p_id']))
 {
     $usr_pub_det = selectOne('users', ['id' => $_GET['usr_id']]);
-    $usr_pub_post = getUserPost($_GET['usr_id'], $_GET['p_id']);
+    $usr_pub_post = getUserPost($_GET['t'] ,$_GET['usr_id'], $_GET['p_id']);
+    if($_GET['t'] == 'events')
+    {
+        $tbl = 'event_';
+    }
+    else
+    {
+        $tbl = 'act_';
+    }
 }
 else
 {
@@ -19,7 +27,7 @@ else
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $usr_pub_post[0]['act_title'] ?> | Elite</title>
+    <title><?php echo $usr_pub_post[0][$tbl . 'title'] ?> | Elite</title>
     <link rel="stylesheet" href="../assets/css/fontawsome/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/style.main.css">
@@ -30,7 +38,7 @@ else
     <nav class="navbar navbar-expand-lg act">
         <div class="container">
 
-            <a class="navbar-brand text-uppercase" href="../../index.php">el<span>i</span>te</a>
+            <a class="navbar-brand text-uppercase" href="../../index.php"><img src="../assets/img/elite_logo.png" alt="">  el<span>i</span>te<small>21</small></a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,8 +64,8 @@ else
         <div class="container">
             <div class="row justify-content-center">
 
-                <div class="col-sm-12 col-md-7 content rounded">
-                    <h2 class="text-capitalize text-center"><?php echo $usr_pub_post[0]['act_title'] ?></h1>
+                <div class="col-sm-12 col-md-7 p-3 content rounded">
+                    <h2 class="text-capitalize text-center"><?php echo $usr_pub_post[0][$tbl . 'title'] ?></h1>
 
                         <div class="author mt-3">
                             <img src="<?php echo BASE_URL . '/assets/img/' . $usr_pub_det['profile_pic'] ?>" alt=""></img>
@@ -65,10 +73,24 @@ else
                             <p class="text-capitalize"><?php echo date('F j, Y', strtotime($usr_pub_post[0]['created_at'])); ?></p>
                         </div>
 
-                        <p class="my-4"><?php echo $usr_pub_post[0]['act_desc'] ?></p>
+                        <img src="<?php echo BASE_URL . '/assets/img/' . $usr_pub_post[0][$tbl . 'img'] ?>" class="img-fluid shadow-lg mx-auto d-block img-thumbnail mb-4"
+                            alt="<?php echo $usr_pub_post[0][$tbl . 'img'] ?>">
 
-                        <img src="<?php echo BASE_URL . '/assets/img/' . $usr_pub_post[0]['act_img'] ?>" class="img-fluid shadow-lg mx-auto d-block img-thumbnail mb-4"
-                            alt="<?php echo $usr_pub_post[0]['act_img'] ?>">
+                        <p class="my-4 text-capitalize"><?php echo $usr_pub_post[0][$tbl . 'desc'] ?></p>
+
+                        <?php if($_GET['t'] == 'events'): ?>
+                            <p class="mb-4 text-capitalize"><?php echo ("<u>This event will be on:</u> " . $usr_pub_post[0]['event_date'] . ", at " . $usr_pub_post[0]['event_time'] . ' .') ?></p>
+                        <?php endif; ?>
+
+                        
+
+                        <?php if(!empty($usr_pub_post[0]['event_video'])): ?>
+                            <div class="embed-responsive embed-responsive-21by9">
+                                <iframe class="embed-responsive embed-responsive-16by9" src="<?php echo $usr_pub_post[0]['event_video'] ?>"
+                                        frameborder="0" allow="accelerometer; autoplay;" allowfullscreen>
+                                </iframe>
+                            </div>
+                        <?php endif;?>
                 </div>
 
             </div>

@@ -37,7 +37,7 @@ adminOnly();
 
                         <h4 class="text-center">Edit User</h4>
 
-                        <?php include(ROOT_PATH . '/app/includes/messages.php') ?>
+                        <?php include(ROOT_PATH . '/app/helpers/messages.php') ?>
 
                         <div class="form-group"><small>All fileds with * are required</small></div>
                         <form action="edit.php" method="POST">
@@ -62,6 +62,20 @@ adminOnly();
                                 <?php endif; ?>
                             </div>
 
+                            <?php if($user_det['super_admin'] == 1): ?>
+                                <div class="form-group">
+                                    <?php if(isset($super_admin) && $super_admin == 1): ?>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" name="super_admin" checked> Super Admin</label>
+                                        </div>
+                                    <?php else: ?>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" name="super_admin"> Super Admin</label>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            <?php endif; ?>
+
                             <button type="submit" name="update-usr" class="btn btn-primary">Submit</button>
 
                         </form>
@@ -81,25 +95,7 @@ adminOnly();
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#sidebar").mCustomScrollbar({
-                theme: "minimal"
-            });
-
-            $('#dismiss, .overlay').on('click', function () {
-                $('#sidebar').removeClass('active');
-                $('.overlay').removeClass('active');
-            });
-
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').addClass('active');
-                $('.overlay').addClass('active');
-                $('.collapse.in').toggleClass('in');
-                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-            });
-        });
-    </script>
+        <script src="../../assets/js/script.main.js"></script>
 </body>
 
 </html>

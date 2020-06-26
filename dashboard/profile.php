@@ -5,8 +5,9 @@ if(!isset($_SESSION['id']))
 {
     usersOnly();
 }
-// $usr_posts = getUserPosts($_SESSION['id']);
+
 $usr_posts = selectAll('activities', ['user_id' => $_SESSION['id']]);
+$usr_events = selectAll('events', ['user_id' => $_SESSION['id']])
 ?>
 <!DOCTYPE html>
 <html>
@@ -94,9 +95,64 @@ $usr_posts = selectAll('activities', ['user_id' => $_SESSION['id']]);
 
                         </div>
 
+                        <div class="setting py-2 mb-4 rounded shadow-lg">
+                            <div class="panel-group">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h5 class="panel-title text-center mb-0">
+                                                <a data-toggle="collapse" href="#collapse1" class="bg-none">More Settings</a>
+                                            </h5>
+                                        </div>
+                                        <div id="collapse1" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <form action="profile.php" method="POST" class="px-4 mt-4">
+
+                                                    <input type="hidden" name="id" value="<?php echo $user_det['id']; ?>">
+
+                                                    <div class="form-group">
+                                                        <label for="new_psw">New Password</label>
+                                                        <input type="password" class="form-control" name="password" placeholder="Enter new password"
+                                                            id="new_psw" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="old_psw">Current Password</label>
+                                                        <input type="password" class="form-control" name="old_psw" placeholder="Current password"
+                                                            id="old_psw" required>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary" name="update-usr-psw">Submit</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="col-sm-12 col-lg-8 posts">
                         <h4 class="posts-head mb-3">My Posts</h4>
+
+                        <?php if(empty($usr_events) && $user_det['super_admin'] == 1): ?>
+                            <?php echo("<p>You didn't post any event yet.</p>") ?>
+                        <?php else: ?>
+                            <?php foreach($usr_events as $usr_event): ?>
+                                <div class="post shadow-lg mb-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="options d-flex justify-content-around">
+                                                <a href="<?php echo("posts/editEvent.php?del_event_id=" . $usr_event['id']) ?>" class="delete"><i class="fal fa-trash"></i> Delete this event</a>
+                                                <a href="<?php echo("posts/editEvent.php?edit_event_id=" . $usr_event['id']) ?>" class="edit"><i class="fal fa-edit"></i> Edit this event</a>
+                                            </div>
+                                            <p class="card-title mt-4 mb-1 text-primary font-weight-bold text-uppercase"><?php echo $usr_event['event_title'] ?></p>
+                                            <p class="card-text mb-1"><?php echo $usr_event['event_desc'] ?></p>
+                                            <p class="card-text mb-1"><?php echo ($usr_event['event_date'] . ' at: ' . $usr_event['event_time'] . ' .') ?></p>
+                                        </div>
+                                        <img class="card-img-bottom img-fluid" src="<?php echo BASE_URL . '/assets/img/' . $usr_event['event_img'] ?>" alt="Card image">
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+
+                        <?php endif; ?>
+
 
                         <?php if(empty($usr_posts)): ?>
                             <?php echo("<p>You don't have any post yet.</p>") ?>
@@ -118,7 +174,6 @@ $usr_posts = selectAll('activities', ['user_id' => $_SESSION['id']]);
                             <?php endforeach; ?>
 
                         <?php endif; ?>
-
                         
                     </div>
                 </div>
@@ -136,25 +191,7 @@ $usr_posts = selectAll('activities', ['user_id' => $_SESSION['id']]);
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#sidebar").mCustomScrollbar({
-                theme: "minimal"
-            });
-
-            $('#dismiss, .overlay').on('click', function () {
-                $('#sidebar').removeClass('active');
-                $('.overlay').removeClass('active');
-            });
-
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').addClass('active');
-                $('.overlay').addClass('active');
-                $('.collapse.in').toggleClass('in');
-                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-            });
-        });
-    </script>
+    <script src="../assets/js/script.main.js"></script>
 </body>
 
 </html>

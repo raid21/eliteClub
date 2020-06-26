@@ -11,6 +11,7 @@ $id = '';
 $email = '';
 $admin = '';
 $usersTable = 'users';
+$super_admin = '';
  
 function LoginUser($user)
 {
@@ -34,7 +35,12 @@ if(isset($_POST['add-usr']))
     {
         unset($_POST['add-usr'], $_POST['passwordConf']);
         $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
         $_POST['profile_pic'] = 'usr.png';
+        $_POST['username'] = mysqli_real_escape_string($conn, $_POST['username']);
+        $_POST['email'] = mysqli_real_escape_string($conn, $_POST['email']);
+
+        $_POST['super_admin'] = isset($_POST['super_admin']) ? 1 : 0;
 
         if(isset($_POST['admin']))
         {
@@ -56,7 +62,6 @@ if(isset($_POST['add-usr']))
     }
     else
     {
-        //display($errors);
         $_SESSION['type'] = 'error';
     }
 }
@@ -79,19 +84,18 @@ if(isset($_POST['login']))
         }
     }
     {
-        $_SESSION['type'] = 'error';   
+        $_SESSION['type'] = 'error'; 
     }
 
 }
-else
 
 if(isset($_GET['del_id']))
 {
     adminOnly();
     $deleted = delete($usersTable, $_GET['del_id']);
+    header('location: ' . BASE_URL . '/dashboard/users/');
     $_SESSION['message'] = 'User deleted successfully';
     $_SESSION['type'] = 'success';
-    header('location: ' . BASE_URL . '/dashboard/users/');
     exit();
 }
 
@@ -102,6 +106,8 @@ if(isset($_GET['id']))
     $username = $_GET['usr'];
     $email = $_GET['admin'];
     $admin = $_GET['admin'] == 1 ? 1 : 0;
+    $super_admin = $_GET['spr_ad'] == 1 ? 1 : 0;
+
 }
 
 if(isset($_POST['update-usr']))
@@ -112,11 +118,12 @@ if(isset($_POST['update-usr']))
     unset($_POST['update-usr'], $_POST['id']);
 
     $_POST['admin'] = isset($_POST['admin']) ? 1 : 0;
+    $_POST['super_admin'] = isset($_POST['super_admin']) ? 1 : 0;
     $user_id = update($usersTable, $id, $_POST);
 
     $_SESSION['message'] = 'User updated successfully';
     $_SESSION['type'] = 'success';
-    header('location: ' . BASE_URL . '/dashboard/users/');
+    header('location: ' . BASE_URL . '/dashboard/users/index.php');
     exit();
 }
 
@@ -134,7 +141,7 @@ if(isset($_POST['update-usr-info']))
         $upload_result =  move_uploaded_file($_FILES['profile_pic']['tmp_name'], $destination);
 
         if ($upload_result) {
-            $_POST['profile_pic'] = $img_name;
+            $_POST['profile_pic'] = mysqli_real_escape_string($conn, $img_name);
         }else{
             array_push($errors, 'Failed to upload image');
         }
@@ -158,5 +165,31 @@ if(isset($_POST['update-usr-info']))
     }
 }
 
+if(isset($_POST['update-usr-psw']))
+{
+    $check_usr_psw = selectOne($usersTable, ['id' => $_POST['id']]);
+
+    if (password_verify($_POST['old_psw'], $check_usr_psw['password'])) 
+    {
+        $id = $_POST['id'];
+        unset($_POST['update-usr-psw'], $_POST['old_psw'], $_POST['id']);
+
+        $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $user_id = update($usersTable, $id, $_POST);
+        $_SESSION['message'] = 'Password updated successfully';
+        $_SESSION['type'] = 'success';
+        header('location: ' . BASE_URL . '/dashboard/profile.php');
+        exit();
+        
+    }
+    else
+    {
+        array_push($errors, "Wrong credentials");
+        $_SESSION['type'] = 'error';
+    }
+    
+}
+
 $user_det = selectOne('users', ['id' => $_SESSION['id']]);
+
 ?>

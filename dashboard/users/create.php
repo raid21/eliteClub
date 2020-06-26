@@ -72,6 +72,14 @@ adminOnly();
                                 </div>
                             </div>
 
+                            <?php if($user_det['super_admin'] == 1): ?>
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" name="super_admin"> Super Admin</label>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+
                             <button type="submit" name="add-usr" class="btn btn-primary">Submit</button>
 
                         </form>
@@ -91,25 +99,7 @@ adminOnly();
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#sidebar").mCustomScrollbar({
-                theme: "minimal"
-            });
-
-            $('#dismiss, .overlay').on('click', function () {
-                $('#sidebar').removeClass('active');
-                $('.overlay').removeClass('active');
-            });
-
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').addClass('active');
-                $('.overlay').addClass('active');
-                $('.collapse.in').toggleClass('in');
-                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-            });
-        });
-    </script>
+    <script src="../../assets/js/script.main.js"></script>
 </body>
 
 </html>

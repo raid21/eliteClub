@@ -54,7 +54,11 @@ header{background: #213b52; height: 75vh; background-image: url(../img/header_he
 }
 .navbar.act{top: 0;}
 .navbar-brand, .navbar-brand:hover{font-size: 30px;color: #08526d;position: relative;}
-.navbar-brand::after{content: '\f0f1';position: absolute;font-family: 'Font Awesome 5 Pro'; margin: 10px 0 0 5px;}
+.navbar-brand img{width: 70px;}
+@media(max-width: 284px)
+{
+    .navbar-brand img{display: none;}
+}
 .navbar-brand span, .navbar-brand span:hover{color: #fdc134;}
 
 .navbar-nav .nav-link {color: #fdc134; margin: 0 0px;}
@@ -219,6 +223,74 @@ header{background: #213b52; height: 75vh; background-image: url(../img/header_he
 
 .read-wrapper{background: #08526d;padding: 30px 10px; border-bottom: 1px solid #fff;}
 .read-wrapper h2{color: #fdc134;margin: 30px 0 0;}
+/* ****************** */
+
+.slider{height: 500px;}
+.slider .carousel-inner .overlay{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .6);
+    z-index: 2;
+}
+.carousel-indicators li{height: 8px;}
+.slider .carousel-item{
+    height: 500px;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+}
+.slider .carousel-one{background-image: url("../img/5.jpg");}
+.slider .carousel-two{background-image: url("../img/6.jpg");}
+@media(max-width: 546px)
+{
+    .slider .carousel-one{background-image: url("../img/4.jpg");}
+    .slider .carousel-two{background-image: url("../img/3.jpg");}   
+}
+
+
+.med-wrapper{background: #fff;padding: 30px 10px; border-bottom: 1px solid #08526d;}
+.med-wrapper h2{margin: 20px 0 35px; color: #08526d;}
+.med-wrapper .domain{padding: 15px; text-align: center; border-radius: 10px; margin-bottom: 20px;}
+.med-wrapper .domain:nth-child(1){border-top: 2px solid #fdc134;}
+.med-wrapper .domain:nth-child(2){border-bottom: 2px solid #fdc134;}
+.med-wrapper .domain:nth-child(3){border-top: 2px solid #fdc134;}
+.med-wrapper .domain i {color: #fdc134; margin-bottom: 15px;}
+.med-wrapper .domain h3 a{color: #08526d;}
+.med-wrapper .modal .modal-header{padding: .3rem 1rem;}
+
+.med-wrapper .modal .modal-header .close{outline: none; color: #08526d; opacity: unset;}
+.med-wrapper .modal .modal-btn{background: #08526d; color: #fff;}
+.med-wrapper .modal .modal-btn:hover{ background: #fdc134; color: #fff; transition: .5s; -webkit-transition: .5s; -moz-transition: .5s; -ms-transition: .5s; -o-transition: .5s; }
+.med-wrapper .modal .modal-body form .form-control, .med-wrapper .modal .modal-body form .form-group label{color: #08526d;}
+.med-wrapper .modal .bootstrap-select .dropdown-toggle:focus{outline: none !important;}
+.med-wrapper .modal .bootstrap-select .dropdown-menu{background: #08526d; padding: 0;}
+.med-wrapper .modal .bootstrap-select .dropdown-menu li a span.text{color: #fff;}
+.med-wrapper .modal .bootstrap-select .dropdown-menu li a span.text:hover{background: #fdc134;}
+.med-wrapper .modal .bootstrap-select .dropdown-toggle .filter-option-inner-inner {color: #08526d}
+.med-wrapper .modal .dropdown-item.active{background: #fdc134;}
+.med-wrapper .modal .dropdown-item:hover{background: #213b52;}
+
+.med-wrapper .modal .two.modal-body{background: #08526d;}
+.med-wrapper .modal .two.modal-body .card{margin-top: 60px;background: #fff;}
+.med-wrapper .modal .two.modal-body .card img{width: 100px; height: 100px;margin: -50px auto 0; border-radius: 50%; border: 2px dashed #fff;}
+.med-wrapper .modal .two.modal-body .card .card-body{padding: 0;}
+.med-wrapper .modal .two.modal-body .card .card-body p a{color: #08526d; font-size: 20px;}
+.med-wrapper .modal .two.modal-body .card .card-body p a:hover{ color: #fdc134; transition: .2s; -webkit-transition: .2s; -moz-transition: .2s; -ms-transition: .2s; -o-transition: .2s; }
+
+#stateTitle{color: #08526d;}
+@media(max-width: 768px)
+{
+    .med-wrapper .domain:nth-child(2){border-bottom: none; border-top: 2px solid #fdc134;}
+}
+/* .read-wrapper .usr-details .img-fluid{height: 130px; width: 150px;} */
+/* .read-wrapper .sp-doctors .card.doctor img{height: 250px;} */
+
+
+/* ********************************** */
 .read-wrapper .content{background: #fff;}
 .read-wrapper .content .author {
     color: #08526d;

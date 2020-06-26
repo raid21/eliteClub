@@ -50,7 +50,7 @@ if(isset($_POST['create-act']))
         $upload_result =  move_uploaded_file($_FILES['act_img']['tmp_name'], $destination);
         
         if ($upload_result) {
-            $_POST['act_img'] = $img_name;
+            $_POST['act_img'] = mysqli_real_escape_string($conn, $img_name);
         }else{
             array_push($errors, 'Failed to upload image');
         }
@@ -65,6 +65,9 @@ if(isset($_POST['create-act']))
         unset($_POST['create-act']);
         $_POST['user_id'] = $_SESSION['id'];
         $_POST['act_desc'] = htmlentities($_POST['act_desc']);
+
+        $_POST['act_desc'] = mysqli_real_escape_string($conn, htmlentities($_POST['act_desc']));
+        $_POST['act_title'] = mysqli_real_escape_string($conn, $_POST['act_title']);
 
         $post_id = create($posts_table, $_POST);
         
@@ -90,7 +93,10 @@ if(isset($_POST['update-act']))
     {
         $id = $_POST['id'];
         unset($_POST['update-act'], $_POST['id']);
-        $_POST['act_desc'] = htmlentities($_POST['act_desc']);
+        
+        $_POST['act_desc'] = mysqli_real_escape_string($conn, htmlentities($_POST['act_desc']));
+        $_POST['act_title'] = mysqli_real_escape_string($conn, $_POST['act_title']);
+
         $post_id = update($posts_table, $id, $_POST);
         $_SESSION['message'] = 'Post updated successfully';
         $_SESSION['type'] = 'success';

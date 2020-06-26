@@ -123,10 +123,10 @@ function delete($table, $id)
     return $stmt->affected_rows;
 }
 
-function getUserPost($usr, $p_id)
+function getUserPost($table_name, $usr, $p_id)
 {
     global $conn;
-    $sql = "SELECT p.*, u.username FROM activities AS p JOIN users AS u ON p.user_id=u.id WHERE p.user_id=? AND p.id=?";
+    $sql = "SELECT p.*, u.username FROM $table_name AS p JOIN users AS u ON p.user_id=u.id WHERE p.user_id=? AND p.id=?";
 
     $stmt = executeQuery($sql, ['user_id' => $usr, 'id' => $p_id]);
     $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);

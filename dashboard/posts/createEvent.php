@@ -58,6 +58,12 @@ $user_det = selectOne('users', ['id' => $_SESSION['id']]);
                             </div>
 
                             <div class="form-group">
+                                <label for="event_video">Event video url</label>
+                                <small> (If you want to add it later leave this field empty)</small>
+                                <textarea class="form-control" id="event_video" name="event_video" rows="3"></textarea>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="event_date">Event Date</label>
                                 <input type="text" class="form-control" name="event_date" value="<?php echo $event_date ?>" placeholder="Ex: june 7, 2020" id="event_date">
                             </div>
@@ -86,26 +92,7 @@ $user_det = selectOne('users', ['id' => $_SESSION['id']]);
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#sidebar").mCustomScrollbar({
-                theme: "minimal"
-            });
-
-            $('#dismiss, .overlay').on('click', function () {
-                $('#sidebar').removeClass('active');
-                $('.overlay').removeClass('active');
-            });
-
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').addClass('active');
-                $('.overlay').addClass('active');
-                $('.collapse.in').toggleClass('in');
-                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-            });
-        });
-
-    </script>
+    <script src="../../assets/js/script.main.js"></script>
 </body>
 
 </html>

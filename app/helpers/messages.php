@@ -1,4 +1,5 @@
 <?php if(isset($_SESSION['type'])): ?>
+    
     <div class="msg <?php echo $_SESSION['type']; ?>">
 
         <?php if(count($errors) > 0): ?>

@@ -1,5 +1,6 @@
 <?php 
 include("path.php"); 
+require(ROOT_PATH . "/app/controllers/contactmail.php");
 require(ROOT_PATH . "/app/controllers/users.php");
 $all_users = selectAll('users', ['admin' => 1]);
 $latest_events = latest_events('events');
@@ -25,7 +26,7 @@ $latest_events = latest_events('events');
         <div class="container">
             <nav class="navbar navbar-expand-lg bg-light" data-aos="fade-left" data-aos-duration="2000">
 
-                <a class="navbar-brand text-uppercase" href="index.php">el<span>i</span>te</a>
+                <a class="navbar-brand text-uppercase" href="index.php"><img src="assets/img/elite_logo.png" alt="">  el<span>i</span>te<small>21</small></a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -52,13 +53,13 @@ $latest_events = latest_events('events');
             
             <?php if(empty($_SESSION['type'])): ?>
                 <div class="hero">
-                <h1 class="text-center text-capitalize">welcome to elite 21</h1>
+                <h2 class="text-center text-capitalize">welcome to elite 21</h2>
                 <h4 class="text-center">Being an Elite is a responsibility more than an advantage! <br>Be the best be the Elite</h4>
             </div>
             <?php else: ?>
                 <div class="mt-5">
-                <?php include(ROOT_PATH . "/app/helpers/messages.php") ?>
-            </div>
+                    <?php include(ROOT_PATH . "/app/helpers/messages.php") ?>
+                </div>
             <?php endif; ?>
             
         </div>
@@ -121,8 +122,7 @@ $latest_events = latest_events('events');
                                         <img src="<?php echo BASE_URL . '/assets/img/' . $event['event_img'] ?>" class="card-img-top" alt="event pic">
                                     </div>
                                     <div class="card-body">
-                                        <a href="#" class="text-capitalize"><?php echo $event['event_title'] ?></a>
-                                        <p class="card-text text-uppercase event-time"><?php echo $event['event_time'] ?></p>
+                                        <a href="<?php echo("activities/read.php?p_id=" . $event['id'] . "&usr_id=" . $event['user_id'] . "&t=events"); ?>" class="text-capitalize"><?php echo $event['event_title'] ?></a>
                                     </div>
                                 </div>
                             </div>
@@ -210,24 +210,24 @@ $latest_events = latest_events('events');
             </div>
 
             <div class="row">
-                <div class="col-sm-12 mt-5 shadow-lg p-5" data-aos="zoom-out-down" data-aos-duration="2500">
-                    <form action="#" method="POST">
+                <div class="col-sm-12 mt-5 shadow-lg p-5">
+                    <form action="index.php" method="POST">
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="inputName" placeholder="Your Name">
+                                <input type="text" class="form-control" name="contact-name" id="inputName" placeholder="Your Full Name">
                             </div>
                             <div class="form-group col-md-6">
-                                <input type="email" class="form-control" id="inputEmail" placeholder="Your Email">
+                                <input type="email" class="form-control" name="contact-email" id="inputEmail" placeholder="Your Email">
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="inputSubject" placeholder="Subject">
+                            <input type="text" class="form-control" name="contact-sub" id="inputSubject" placeholder="Subject">
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control" id="inputMessage" placeholder="Your Message"
+                            <textarea class="form-control" id="inputMessage" name="contact-msg" placeholder="Your Message"
                                 rows="3"></textarea>
                         </div>
-                        <div class="text-center"><button type="submit" class="btn">Send Message</button></div>
+                        <div class="text-center"><button type="submit" name="submt-msg" class="btn">Send Message</button></div>
                     </form>
                 </div>
             </div>
