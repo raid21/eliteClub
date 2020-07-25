@@ -68,7 +68,7 @@ if(isset($_GET['sp_id']))
     $deleted = delete($sp_table, $_GET['sp_id']);
     $_SESSION['message'] = 'Specialty deleted successfully';
     $_SESSION['type'] = 'success';
-    header('location: ' . BASE_URL . '/dashboard/doctors/all.php');
+    header('location: ' . BASE_URL . '/dashboard/teleconsultation/all_domains/all_specialties.php');
     exit();
     
 }
@@ -100,6 +100,9 @@ if(isset($_POST['add-dr']))
 
     if(count($errors) === 0 )
     {
+        $_POST['drName'] = strtolower($_POST['drName']);
+        $_POST['drWilaya'] = strtolower($_POST['drWilaya']);
+
         if(isset($_POST['drSp']) && $_POST['drSp'] !== 'chooseone')
         {
             unset($_POST['drType']);
@@ -207,6 +210,8 @@ if(isset($_POST['update-dr']))
 
     if(count($errors) === 0)
     {
+        $_POST['drName'] = strtolower($_POST['drName']);
+        $_POST['drWilaya'] = strtolower($_POST['drWilaya']);
         $sp_id = update('doctors', $dr_id, $_POST);
         $_SESSION['type'] = 'success';
         $_SESSION['message'] = 'Doctor updates successfully';
@@ -271,6 +276,8 @@ if(isset($_POST['update-Dentist']))
 
     if(count($errors) === 0)
     {
+        $_POST['drName'] = strtolower($_POST['drName']);
+        $_POST['drWilaya'] = strtolower($_POST['drWilaya']);
         $sp_id = update('dentists' , $dr_id, $_POST);
         $_SESSION['type'] = 'success';
 
@@ -315,6 +322,8 @@ if(isset($_POST['update-Pharmacy']))
 
     if(count($errors) === 0)
     {
+        $_POST['drName'] = strtolower($_POST['drName']);
+        $_POST['drWilaya'] = strtolower($_POST['drWilaya']);
         $sp_id = update('pharmacies' , $dr_id, $_POST);
         $_SESSION['type'] = 'success';
 
@@ -334,9 +343,4 @@ if(isset($_POST['update-Pharmacy']))
 
 }
 // ******* end of editt dentists & pharmacies & doctors
-
-if(isset($_GET['sps_id']))
-{
-    $all_med = selectAll('doctors', ['drSp' => $_GET['sps_id']]);
-}
 ?>

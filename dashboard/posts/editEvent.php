@@ -52,10 +52,16 @@ $user_det = selectOne('users', ['id' => $_SESSION['id']]);
                                 <textarea class="form-control" id="event_desc" name="event_desc" rows="3"><?php echo $event_desc ?></textarea>
                             </div>
 
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="event_img">Select image</label>
                                 <small> (If you don't want to update event image leave this field empty )</small>
                                 <input type="file" class="form-control-file" name="event_img" id="event_img">
+                            </div> -->
+
+                            <div class="form-group">
+                                <label for="event_imgs">Select image</label>
+                                <small> (If you to add more pictures else leave it empty )</small>
+                                <input type="file" class="form-control-file" name="event_imgs[]" id="event_imgs" multiple=''>
                             </div>
 
                             <div class="form-group">

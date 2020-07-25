@@ -1,9 +1,12 @@
 <?php 
 include("../path.php");
-include(ROOT_PATH . '/app/controllers/teleconsultation.php');
-//include(ROOT_PATH . '/app/controllers/users.php');
+include(ROOT_PATH . '/app/controllers/filterDom.php');
 $user_det = selectOne('users', ['id' => $_SESSION['id']]);
 $all_sps = selectAll('specialty');
+if(count($all_med) > 0)
+{
+    display($all_med);
+}
 $i = 1;
 ?>
 <!DOCTYPE html>
@@ -60,6 +63,13 @@ $i = 1;
     <div class="med-wrapper">
         <div class="container">
             <h2 class="font-weight-bold text-center">All Medical Domains</h2>
+
+            <div class="mb-5" id="succ_notif">
+                <?php if(isset($_SESSION['type'])): ?>
+                    <?php include(ROOT_PATH . "/app/helpers/messages.php") ?>
+                <?php endif;?>
+            </div>
+
             <div class="row justify-content-center">
                 
                 <div class="domain col-sm-12 col-md-4">
@@ -91,22 +101,22 @@ $i = 1;
                         </div>
 
                         <div class="modal-body">
-                            <form action="#" method="post">
+                            <form action="domains.php" method="post">
                                 <div class="form-group">
                                     <label for="inputDomain">You're searching for</label>
-                                    <select id="inputDomain" class="form-control selectpicker" name="inputDomain">
-                                        <option selcted>Choose one...</option>
-                                        <option>Dentists</option>
-                                        <option>Pharmacies</option>
+                                    <select id="inputDomain" class="form-control selectpicker" name="drType">
+                                        <option value="chooseone" selcted>Choose one...</option>
+                                        <option value="dentists">Dentists</option>
+                                        <option value="pharmacies" >Pharmacies</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="drInWilaya">Choose City</label>
-                                    <input type="text" class="form-control" name="drInWilaya" id="drInWilaya" placeholder="Ex: skikda">
+                                    <input type="text" class="form-control" name="drWilaya" id="drInWilaya" placeholder="Ex: skikda" required>
                                 </div>
 
-                                <button type="submit" name="add-sp" class="btn modal-btn">Search</button>
+                                <button type="submit" name="search_dr_dom" class="btn modal-btn">Search</button>
                             </form>
                         </div>
 
@@ -127,7 +137,7 @@ $i = 1;
                         </div>
 
                         <div class="two modal-body">
-                            <div class="row">
+                            <div class="row justify-content-center">
                                 
                                 <?php foreach($all_sps as $sps): ?>
                                     <div class="col-sm-12 col-lg-6">

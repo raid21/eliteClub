@@ -55,4 +55,47 @@ if (isset($_POST['submt-msg'])) {
         $_SESSION['type'] = 'error';
     }
 }
+
+
+function send_psw_reset_link($usr_email, $usr_id, $tk)
+{
+
+    $to = $usr_email;
+    $link = 'http://elite.club/reset_psw.php?ui=' . $usr_id . '&to=' . $tk;
+    require_once(ROOT_PATH . '/vendor/autoload.php');
+    try {
+        $transport = (new Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl'))
+            ->setUsername('elite.skikda@gmail.com')
+            ->setPassword('eliteskikda123');
+                
+        $mailer = new Swift_Mailer($transport);
+                
+        $message = new Swift_Message();
+                
+        $message->setSubject('Reset Password Request');
+                
+        $message->setFrom(['elite.skikda@gmail.com' => 'Elite Team']);
+                
+        $message->addTo($to);
+    
+        $message->setBody(
+            '<html>' .
+            ' <body>' .
+            '  <p> Hello There, this is Elite Skikda Team</p>' .
+            '  <p> Please click on the link below to continue reseting you password</p>' .
+            '  <a href="'. $link .'">Reset your password</a>' .
+            ' </body>' .
+            '</html>',
+            'text/html'
+        );
+    
+        $mailer->send($message);
+
+    } 
+    catch (Exception $e) 
+    {
+        echo $e->getMessage();
+    }
+
+}
 ?>

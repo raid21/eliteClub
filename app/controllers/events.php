@@ -13,6 +13,23 @@ $event_time = '';
 
 $errors = array();
 
+function reArrayFiles($file_post)
+{
+    $file_ary = array();
+    $file_count = count($file_post['name']);
+    $file_keys = array_keys($file_post);
+
+    for ($i=0; $i<$file_count; $i++)
+    {
+        foreach($file_keys as $key)
+        {
+            $file_ary[$i][$key] = $file_post[$key][$i];
+        }
+    }
+    return $file_ary;
+}
+
+
 // update posts
 if(isset($_GET['edit_event_id']))
 {
@@ -97,19 +114,39 @@ if(isset($_POST['update-event']))
     adminOnly();
     $errors = validateEvent($_POST);
 
-    if (!empty($_FILES['event_img']['name'])) {        
+    // if (!empty($_FILES['event_img']['name'])) {        
         
-        $img_name = time() . '_' . $_FILES['event_img']['name'];
+    //     $img_name = time() . '_' . $_FILES['event_img']['name'];
         
-        $destination = ROOT_PATH . '/assets/img/' . $img_name;
+    //     $destination = ROOT_PATH . '/assets/img/' . $img_name;
 
-        $upload_result =  move_uploaded_file($_FILES['event_img']['tmp_name'], $destination);
+    //     $upload_result =  move_uploaded_file($_FILES['event_img']['tmp_name'], $destination);
         
-        if ($upload_result) {
-            $_POST['event_img'] = mysqli_real_escape_string($conn, $img_name);
-        }else{
-            array_push($errors, 'Failed to upload image');
+    //     if ($upload_result) {
+    //         $_POST['event_img'] = mysqli_real_escape_string($conn, $img_name);
+    //     }else{
+    //         array_push($errors, 'Failed to upload image');
+    //     }
+    // }
+
+    if (count($_FILES['event_imgs']['name']) > 0) {
+        $all_img_files = reArrayFiles($_FILES['event_imgs']);
+        $uploaded_files = array();
+
+        foreach ($all_img_files as $file) {
+            $img_name = "ELITE_ASSOCIATION_" . time() . '_' . $file['name'];
+                
+            $destination = ROOT_PATH . '/assets/img/' . $img_name;
+        
+            $upload_result =  move_uploaded_file($file['tmp_name'], $destination);
+                
+            if ($upload_result) {
+                array_push($uploaded_files, $img_name);
+            } else {
+                echo('error');
+            }
         }
+        $_POST['event_imgs'] = htmlentities(json_encode($uploaded_files));
     }
 
     if(count($errors) === 0 )
@@ -129,7 +166,6 @@ if(isset($_POST['update-event']))
         {
             unset($_POST['event_video']);
         }
-
         $post_id = update($events_table, $id, $_POST);
         $_SESSION['message'] = 'Event updated successfully';
         $_SESSION['type'] = 'success';

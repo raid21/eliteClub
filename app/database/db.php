@@ -155,4 +155,37 @@ function latest_events($table)
     return $records;
 
 }
+
+function selectAll_FromLast($table, $conditions = [])
+{
+    global $conn;
+    $sql = "SELECT * FROM $table";
+
+    if(empty($conditions))
+    {
+        $sql = $sql . " ORDER BY id DESC";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $records;
+    }
+    else
+    {
+
+        $i = 0;
+        foreach ($conditions as $key => $value) {
+            if($i === 0){
+                $sql = $sql . " WHERE $key=?";
+            }
+            else{
+                $sql = $sql . " AND $key=?";
+            }
+            $i++;
+        }
+        $sql = $sql . " ORDER BY id DESC";
+        $stmt = executeQuery($sql, $conditions);
+        $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $records;
+    }
+}
 ?>

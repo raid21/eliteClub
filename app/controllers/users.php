@@ -71,9 +71,22 @@ if(isset($_POST['login']))
     $errors = validateLogin($_POST);
     
     if (count($errors) === 0) {
-        $user = selectOne($usersTable, ['username' => $_POST['username']]);
+        $user = selectOne($usersTable, ['username' => mysqli_real_escape_string($conn, trim($_POST['username']))]);
         if ($user && password_verify($_POST['password'], $user['password'])) 
         {
+            // Saving the username and password as cookies 
+            if (isset($_POST['keep-logged'])) 
+            { 
+                // 10years * 365days * 24hrs * 60mins * 60secs 
+                setcookie("user_login", $_POST['username'], time() + (10 * 365 * 24 * 60 * 60)); 
+                setcookie("user_password", $_POST['password'], time() + (10 * 365 * 24 * 60 * 60)); 
+            }
+            else
+            {
+                setcookie("user_login", "", time() - 3600);
+                setcookie("user_password", "", time() - 3600);
+            }
+            
             // login the user
             LoginUser($user);
         }
@@ -87,6 +100,42 @@ if(isset($_POST['login']))
         $_SESSION['type'] = 'error'; 
     }
 
+}
+
+if(isset($_POST['recover_psw']))
+{
+    $recover_email = mysqli_real_escape_string($conn, trim($_POST['email']));
+    if(!filter_var($recover_email, FILTER_VALIDATE_EMAIL))
+    {
+        array_push($errors, 'Email is not valid');
+    }
+
+    if (count($errors) === 0)
+    {
+        $recover_usr = selectOne('users', ['email' => $recover_email]);
+        if($recover_usr)
+        {
+            require(ROOT_PATH . "/app/controllers/contactmail.php");
+            $token = bin2hex(random_bytes(50));
+            $_POST['email'] = $recover_email;
+            $_POST['token'] = $token;
+            $_POST['verified'] = 0;
+            unset($_POST['recover_psw']);
+            $rq_id = create('password_reset', $_POST);
+            send_psw_reset_link($recover_email, $recover_usr['id'], $token);
+            $_SESSION['type'] = 'success';
+            $_SESSION['message'] = 'Check your email, we just sent you the reset link';
+        }
+        else
+        {
+            array_push($errors, 'No one is regestred with this email');
+            $_SESSION['type'] = 'error';
+        }
+    }
+    else
+    {
+        $_SESSION['type'] = 'error';
+    }
 }
 
 if(isset($_GET['del_id']))

@@ -6,8 +6,8 @@ if(!isset($_SESSION['id']))
     usersOnly();
 }
 
-$usr_posts = selectAll('activities', ['user_id' => $_SESSION['id']]);
-$usr_events = selectAll('events', ['user_id' => $_SESSION['id']])
+$usr_posts = selectAll_FromLast('activities', ['user_id' => $_SESSION['id']]);
+$usr_events = selectAll_FromLast('events', ['user_id' => $_SESSION['id']])
 ?>
 <!DOCTYPE html>
 <html>

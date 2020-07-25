@@ -73,6 +73,9 @@
                             <li>
                                 <a href="<?php echo BASE_URL . '/dashboard/teleconsultation/creation/createMedicalSp.php' ?>">Add Specialty</a>
                             </li>
+                            <li>
+                                <a href="<?php echo BASE_URL . '/dashboard/teleconsultation/all_domains/all_specialties.php' ?>">All Specialties</a>
+                            </li>
                         </ul>
                     </li>
                 <?php endif; ?>

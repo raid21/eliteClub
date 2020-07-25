@@ -1,7 +1,8 @@
 <?php 
 include("path.php"); 
+include(ROOT_PATH . "/app/database/db.php");
 require(ROOT_PATH . "/app/controllers/contactmail.php");
-require(ROOT_PATH . "/app/controllers/users.php");
+// require(ROOT_PATH . "/app/controllers/users.php");
 $all_users = selectAll('users', ['admin' => 1]);
 $latest_events = latest_events('events');
 ?>

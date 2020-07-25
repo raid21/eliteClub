@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     $("#sidebar").mCustomScrollbar({
         theme: "minimal"
     });
@@ -39,4 +40,5 @@ var swiper = new Swiper('.swiper-container', {
         el: '.swiper-pagination',
     },
 });
+
 

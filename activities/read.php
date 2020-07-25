@@ -30,7 +30,22 @@ else
     <title><?php echo $usr_pub_post[0][$tbl . 'title'] ?> | Elite</title>
     <link rel="stylesheet" href="../assets/css/fontawsome/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
     <link rel="stylesheet" href="../assets/css/style.main.css">
+    <style>
+        .thumb{
+            margin-bottom: 30px;
+        }
+        .modal-header {
+            border-bottom: none;
+        }
+        .modal-title {
+            color:#000;
+        }
+        .modal-footer{
+            display:none;
+        }
+    </style>
 </head>
 
 <body>
@@ -64,7 +79,7 @@ else
         <div class="container">
             <div class="row justify-content-center">
 
-                <div class="col-sm-12 col-md-7 p-3 content rounded">
+                <div class="col-sm-12 col-md-8 p-3 content rounded">
                     <h2 class="text-capitalize text-center"><?php echo $usr_pub_post[0][$tbl . 'title'] ?></h1>
 
                         <div class="author mt-3">
@@ -73,8 +88,33 @@ else
                             <p class="text-capitalize"><?php echo date('F j, Y', strtotime($usr_pub_post[0]['created_at'])); ?></p>
                         </div>
 
-                        <img src="<?php echo BASE_URL . '/assets/img/' . $usr_pub_post[0][$tbl . 'img'] ?>" class="img-fluid shadow-lg mx-auto d-block img-thumbnail mb-4"
-                            alt="<?php echo $usr_pub_post[0][$tbl . 'img'] ?>">
+                        <?php if($_GET['t'] == 'events'): ?>
+                            <?php if(isset($usr_pub_post[0]['event_imgs'])): ?>
+
+                                <?php $all_imgs = json_decode(html_entity_decode($usr_pub_post[0]['event_imgs'])); ?>
+                                <div class="row justify-content-center rounded m-0" style="background: #08526d; padding-top: 25px;">
+                                    <?php foreach($all_imgs as $imgs): ?>
+                                        <div class="col-lg-6 col-md-6  thumb">
+                                            <a href="<?php echo BASE_URL . '/assets/img/' . $imgs ?>" class="fancybox">
+                                                <img src="<?php echo BASE_URL . '/assets/img/' . $imgs ?>" class="img-fluid" alt="">
+                                            </a>
+                                        </div>
+                                    <?php endforeach;?>
+                                </div>
+
+                            <?php else: ?>
+
+                                <img src="<?php echo BASE_URL . '/assets/img/' . $usr_pub_post[0][$tbl . 'img'] ?>" class="img-fluid shadow-lg mx-auto d-block img-thumbnail mb-4"
+                                    alt="<?php echo $usr_pub_post[0][$tbl . 'img'] ?>">
+
+                            <?php endif; ?>
+
+                        <?php else: ?>
+
+                            <img src="<?php echo BASE_URL . '/assets/img/' . $usr_pub_post[0][$tbl . 'img'] ?>" class="img-fluid shadow-lg mx-auto d-block img-thumbnail mb-4"
+                                alt="<?php echo $usr_pub_post[0][$tbl . 'img'] ?>">
+
+                        <?php endif; ?>
 
                         <p class="my-4 text-capitalize"><?php echo $usr_pub_post[0][$tbl . 'desc'] ?></p>
 
@@ -124,6 +164,22 @@ else
     <script src="../assets/js/jquery.min.js"></script>
     <script src="../assets/js/popper.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".fancybox").fancybox({
+                openEffect: "none",
+                closeEffect: "none"
+            });
+
+            $(".zoom").hover(function(){
+
+                $(this).addClass('transition');
+                }, function(){
+                    $(this).removeClass('transition');
+                });
+        });
+    </script>
     <script src="../assets/js/script.main.js"></script>
 </body>
 
