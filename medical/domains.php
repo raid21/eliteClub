@@ -130,13 +130,15 @@ $i = 1;
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
 
-                        <div class="modal-header">
+                        <div class="modal-header dr"><span class="dr_modal_title">Choose Specialty</span>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
 
                         <div class="two modal-body">
+
+                            <?php if(!empty($all_sps)): ?>
                             <div class="row justify-content-center">
                                 
                                 <?php foreach($all_sps as $sps): ?>
@@ -151,6 +153,9 @@ $i = 1;
                                 <?php endforeach; ?>
 
                             </div>
+                            <?php else: ?>
+                                <p style="color: #fff; font-size: 18px;">There is no specialty yet !</p>
+                            <?php endif; ?>
                         </div>
 
                     </div>

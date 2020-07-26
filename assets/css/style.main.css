@@ -262,6 +262,8 @@ header{background: #213b52; height: 75vh; background-image: url(../img/header_he
 .med-wrapper .domain h3 a{color: #08526d;}
 .med-wrapper .modal .modal-header{padding: .3rem 1rem;}
 
+.med-wrapper .modal .modal-header.dr{padding: 10px;}
+.med-wrapper .modal .modal-header.dr .dr_modal_title{color: #fdc134; font-size: 18px;}
 .med-wrapper .modal .modal-header .close{outline: none; color: #08526d; opacity: unset;}
 .med-wrapper .modal .modal-btn{background: #08526d; color: #fff;}
 .med-wrapper .modal .modal-btn:hover{ background: #fdc134; color: #fff; transition: .5s; -webkit-transition: .5s; -moz-transition: .5s; -ms-transition: .5s; -o-transition: .5s; }
@@ -289,17 +291,17 @@ header{background: #213b52; height: 75vh; background-image: url(../img/header_he
 .read-wrapper .all_dm_form form{border: 1px solid #fff; padding: 10px;}
 .read-wrapper .all_dm_form form label{color: #fff;}
 .read-wrapper .all_dm_form form .all_dm_form_btn{background: #fdc134; color: #fff;}
+.read-wrapper .card.all{ border-radius:25px ; -webkit-border-radius:25px ; -moz-border-radius:25px ; -ms-border-radius:25px ; -o-border-radius:25px ; }
+.read-wrapper .card.all .img_card{position: relative;display: flex;align-items: center;justify-content: center;height: 126px;}
+.read-wrapper .card.all .img_card::after{position: absolute;content: '';width: 100%;height: 100%;top: 0;left: 0;right: 0;bottom: 0;background: #fdc134;clip-path: polygon(0 0, 100% 0, 100% 100%, 0 56%);border-top-right-radius: 25px;border-top-left-radius: 25px;}
 
-.read-wrapper .card.all .img_card{display: flex; align-items: center; justify-content: center;height: 126px;}
-.read-wrapper .card.all .img_card::before{content: '';position: absolute;top: 0;left: 0;width: 100%;height: 100%;clip-path: polygon(0 23%, 0 100%, 100% 100%, 100% 45%);background: #fdc134;
-}
 .read-wrapper .card.all .img_card img{width: 110px; height: 110px; border-radius: 50%; z-index: 9999;}
-.read-wrapper .card.all .card-body{z-index: 99999;padding-left: 0;}
-.read-wrapper .card.all .card-body .card-title{color: #fff;text-decoration: underline;}
+.read-wrapper .card.all .card-body{padding-left: 0;}
+.read-wrapper .card.all .card-body .card-title{color: #fdc134;text-decoration: underline;}
 .read-wrapper .card.all .card-body .card-text{color: #08526d;font-size: 18px;}
 .read-wrapper .card.all .card-body .card-text span{padding: 5px 7px 5px 20px;background: #08526d;color: #fff;border-top-right-radius: 10%;border-bottom-right-radius: 10%;}
 .read-wrapper .card.all .card-body .card-text a{color: #08526d;}
-.read-wrapper .card.all .card-body .usr_contact_dr{color: #08526d; border: 2px solid #fff;}
+.read-wrapper .card.all .card-body .usr_contact_dr{color: #08526d; border: 2px solid #08526d;}
 .read-wrapper .card.all .card-body .usr_contact_dr .btn{background: #08526d;color: #fff;}
 .med-wrapper .msg, .read-wrapper .msg {
     width: 95%;

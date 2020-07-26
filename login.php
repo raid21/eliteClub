@@ -63,7 +63,7 @@ guestsOnly();
                 </form>
 
                 <div class="mt-4 text-center">
-                  <a href="#" data-toggle="modal" data-target="#recover_psw_modal" style="color: #fff; font-size: 20px">Forgot your password!</a>
+                  <a href="#" data-toggle="modal" data-target="#recover_psw_modal" style="color: #fff; font-size: 20px">Forgot your password ?</a>
                 </div>
 
             </div>
@@ -96,7 +96,7 @@ guestsOnly();
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
 
-          <div class="modal-header">
+          <div class="modal-header"><span class="reset_psw_title">Reset Password</span>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -107,10 +107,10 @@ guestsOnly();
 
               <div class="form-group">
                 <label for="email">Enter your email</label>
-                <input type="email" name="email" class="form-control" id="email" placeholder="Ex: ex@example.com" required>              
+                <input type="email" name="email" class="form-control" id="email" placeholder="ex@example.com" required>              
               </div>
               
-              <button type="submit" name="recover_psw" value="recover_psw" class="btn">Recover</button>
+              <button type="submit" name="recover_psw" value="recover_psw" class="btn">Reset</button>
 
             </form>
           </div>

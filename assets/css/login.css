@@ -109,7 +109,8 @@ h2.login-title span{color: #fdc134;}
 #password_toggler:hover{cursor: pointer;}
 
 .modal .modal-body{background: #08526d;}
-.modal .modal-header{padding: 5px;}
+.modal .modal-header .reset_psw_title{color: #fdc134;font-size: 18px;}
+.modal .modal-header{padding: 10px;}
 .modal .modal-body form label{color: #fff;font-size: 20px;}
 .modal .modal-body form button{background: #fff; color: #fdc134; font-size: 20px; width: 100%;}
 .modal .modal-body form button:hover{background: #fdc134; color: #fff; transition: .1s;}
